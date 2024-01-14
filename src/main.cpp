@@ -3,6 +3,7 @@
 #include <singleLEDLibrary.h>
 #include <SimpleCLI.h>
 #include <SoftwareSerial.h>
+#include <avr/wdt.h>
 
 #include "AddressBook.hpp"
 
@@ -12,6 +13,7 @@ SoftwareSerial gsmSerial(8, 9);
 #define PIN_HEARTBEAT_LED 13
 #define PIN_USER_LED 3
 #define PIN_CMD_RELAY 4
+#define PIN_BTN_USER 2
 
 sllib led(PIN_USER_LED);
 sllib heartbeatLed(PIN_HEARTBEAT_LED);
@@ -28,7 +30,7 @@ enum {
 } systemState;
 
 OneButton btn = OneButton(
-    2,    // Input pin for the button
+    PIN_BTN_USER,    // Input pin for the button
     true, // Button is active LOW
     true  // Enable internal pull-up resistor
 );
@@ -248,10 +250,10 @@ void setup()
 
   // This makes sure the modem correctly reports incoming events
   vcs.hangCall();
-
   Serial.println("Done");
 
   // gsmSerial.begin(9600);
+  wdt_enable(WDTO_2S); 
   systemState = SYSTEM_IDLE;
   Serial.println("Boot completed");
 }
@@ -358,4 +360,5 @@ void loop()
     default:
       break;
   }
+  wdt_reset(); 
 }

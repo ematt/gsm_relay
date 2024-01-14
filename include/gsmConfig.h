@@ -25,18 +25,15 @@
 #define DEBUG_GSM_GENERIC_PORT Serial
 
 // Debug Level from 0 to 5. Level 5 is to print out AT commands and responses
-#define _GSM_GENERIC_LOGLEVEL_ 1
+#define _GSM_GENERIC_LOGLEVEL_ 0
 
 #define SECRET_PINNUMBER ""
-#define SECRET_GPRS_APN "GPRS_APN"      // replace your GPRS APN
-#define SECRET_GPRS_LOGIN "login"       // replace with your GPRS login
-#define SECRET_GPRS_PASSWORD "password" // replace with your GPRS password
 
 #define GSM_USING_SOFTWARE_SERIAL true
 #define SerialGSM gsmSerial
 #define GSM_MODEM_SIM900 true
 
 // libraries
-#include "GSM_Generic/src/GSM_Generic_Main.h"
+#include "GSM_Generic_Main.h"
 
 #endif // defines_h
